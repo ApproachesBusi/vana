@@ -63,15 +63,40 @@ async function startServer() {
 
   // Auth Routes
   app.post("/api/auth/login", (req, res) => {
-    const { email, password } = req.body;
+    const { email, role } = req.body;
     const data = getData();
-    const user = data.users.find((u: any) => u.email === email && u.password === password);
-    if (user) {
-      const { password, ...userWithoutPassword } = user;
-      res.json(userWithoutPassword);
-    } else {
-      res.status(401).json({ error: "Invalid credentials" });
+
+    // Temporary open-login mode: allow access with any entered credentials.
+    // If a user exists for the email, reuse it and override role with selected login role.
+    const existingUser = data.users.find((u: any) => u.email === email);
+    if (existingUser) {
+      const selectedRole = role === "doctor" ? "doctor" : "patient";
+      const patient = data.patients.find((p: any) => p.email === email);
+      const fallbackPatientId = data.patients[0]?.id || null;
+      const userWithoutPassword = {
+        id: existingUser.id,
+        email: existingUser.email,
+        name: existingUser.name,
+        role: selectedRole,
+        patientId: selectedRole === "patient" ? (existingUser.patientId || patient?.id || fallbackPatientId) : null
+      };
+      return res.json(userWithoutPassword);
     }
+
+    const selectedRole = role === "doctor" ? "doctor" : "patient";
+    const inferredName = typeof email === "string" && email.includes("@")
+      ? email.split("@")[0]
+      : "Guest User";
+    const patient = data.patients.find((p: any) => p.email === email);
+    const fallbackPatientId = data.patients[0]?.id || null;
+
+    return res.json({
+      id: `guest-${Date.now()}`,
+      email: email || "guest@curahealth.local",
+      name: inferredName,
+      role: selectedRole,
+      patientId: selectedRole === "patient" ? (patient?.id || fallbackPatientId) : null
+    });
   });
 
   app.post("/api/auth/register", (req, res) => {

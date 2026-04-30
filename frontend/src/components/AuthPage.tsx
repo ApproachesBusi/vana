@@ -4,7 +4,6 @@ import {
   Mail, 
   Lock, 
   User, 
-  Phone, 
   ArrowRight, 
   Activity, 
   AlertCircle,
@@ -40,7 +39,13 @@ export default function AuthPage({ onSuccess, onBack }: AuthPageProps) {
     try {
       let user;
       if (isLogin) {
-        user = await api.login({ email: formData.email, password: formData.password });
+        const selectedLoginRole = role;
+        user = await api.login({ email: formData.email, password: formData.password, role: selectedLoginRole });
+        // Ensure UI routing always follows the role selected in the login dropdown.
+        user = {
+          ...user,
+          role: selectedLoginRole
+        };
       } else {
         user = await api.register({ ...formData, role });
       }
@@ -168,6 +173,23 @@ export default function AuthPage({ onSuccess, onBack }: AuthPageProps) {
                 )}
 
                 <div className="space-y-1">
+                  {isLogin && (
+                    <div className="space-y-1">
+                      <label className="text-xs font-bold text-slate-500 uppercase tracking-widest px-1">Login As</label>
+                      <div className="relative">
+                        <select
+                          required
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 font-medium"
+                          value={role}
+                          onChange={e => setRole(e.target.value as 'patient' | 'doctor')}
+                        >
+                          <option value="patient">Patient</option>
+                          <option value="doctor">Doctor</option>
+                        </select>
+                      </div>
+                    </div>
+                  )}
+
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-widest px-1">Email Address</label>
                   <div className="relative">
                     <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
