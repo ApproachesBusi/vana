@@ -1,0 +1,6 @@
+{
+  "name": "CuraHealth Clinic Management System",
+  "description": "A comprehensive, production-ready healthcare management platform for patient records, appointments, billing, and resource allocation.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["AI-powered voice notes", "Real-time appointment scheduling", "Advanced financial analytics"]
+}

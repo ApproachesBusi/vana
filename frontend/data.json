@@ -1,0 +1,155 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "email": "dr.sarah@curahealth.com",
+      "name": "Dr. Sarah Wilson",
+      "role": "doctor",
+      "password": "password123"
+    },
+    {
+      "id": "u2",
+      "email": "john@example.com",
+      "name": "John Doe",
+      "role": "patient",
+      "password": "password123",
+      "patientId": "p1"
+    },
+    {
+      "id": "u1777549554048",
+      "email": "defencex2@gmail.com",
+      "name": "deon Mongwe",
+      "role": "patient",
+      "password": "123456",
+      "patientId": "p1777549554048"
+    },
+    {
+      "id": "u1777549658934",
+      "email": "defencex1@gmail.com",
+      "name": "Dr Vigor",
+      "role": "doctor",
+      "password": "12345678",
+      "patientId": null
+    }
+  ],
+  "patients": [
+    {
+      "id": "p1",
+      "name": "John Doe",
+      "dob": "1985-05-12",
+      "gender": "Male",
+      "phone": "555-0101",
+      "email": "john@example.com",
+      "history": "Hypertension",
+      "allergies": "Penicillin"
+    },
+    {
+      "id": "p2",
+      "name": "Jane Smith",
+      "dob": "1992-08-24",
+      "gender": "Female",
+      "phone": "555-0102",
+      "email": "jane@example.com",
+      "history": "None",
+      "allergies": "Peanuts"
+    },
+    {
+      "id": "p1777549554048",
+      "name": "deon Mongwe",
+      "email": "defencex2@gmail.com",
+      "dob": "2000-01-01",
+      "gender": "Not Specified",
+      "phone": "",
+      "history": "New Patient",
+      "allergies": "None"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "a1",
+      "patientId": "p1",
+      "doctorId": "d1",
+      "date": "2026-05-01",
+      "time": "09:00",
+      "type": "Check-up",
+      "status": "Scheduled"
+    },
+    {
+      "id": "a2",
+      "patientId": "p2",
+      "doctorId": "d2",
+      "date": "2026-05-01",
+      "time": "10:30",
+      "type": "Follow-up",
+      "status": "Scheduled"
+    },
+    {
+      "id": "a1777549594272",
+      "patientId": "p1777549554048",
+      "doctorId": "d2",
+      "date": "2026-05-01",
+      "time": "09:00",
+      "type": "Consultation",
+      "status": "Scheduled"
+    }
+  ],
+  "doctors": [
+    {
+      "id": "d1",
+      "name": "Dr. Sarah Wilson",
+      "specialty": "General Medicine",
+      "availability": [
+        "Monday",
+        "Wednesday",
+        "Friday"
+      ]
+    },
+    {
+      "id": "d2",
+      "name": "Dr. James Miller",
+      "specialty": "Cardiology",
+      "availability": [
+        "Tuesday",
+        "Thursday"
+      ]
+    }
+  ],
+  "billing": [
+    {
+      "id": "b1",
+      "patientId": "p1",
+      "amount": 150,
+      "status": "Paid",
+      "date": "2026-04-20",
+      "description": "Standard Consultation"
+    }
+  ],
+  "resources": {
+    "beds": [
+      {
+        "id": "b101",
+        "name": "Bed 101",
+        "type": "Standard",
+        "status": "Available"
+      },
+      {
+        "id": "b102",
+        "name": "Bed 102",
+        "type": "Standard",
+        "status": "Occupied"
+      }
+    ],
+    "rooms": [
+      {
+        "id": "r1",
+        "name": "Exam Room 1",
+        "status": "Available"
+      },
+      {
+        "id": "r2",
+        "name": "Exam Room 2",
+        "status": "In Use"
+      }
+    ]
+  }
+}
